@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>Principal</title>
+    </head>
+    <body>
+        <header class="header">
+            <div class="menu container">
+                <img src="http://www.sophenia.com.ar/img/logo-blanco.png" alt="hola" width="80px" height="80px">
+                <input type="checkbox" id="menu"/>
+                <label for="menu">
+                    <img src="" alt="" class="menu-icon">
+                </label>
+                {% if user.is_authenticated %}
+                    <nav class="navbar">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><p>Hola, {{ user.username}}</p></li>
+                            <li><a href="{% url 'logout' %}">Cerrar Sesion</a></li>
+                        </ul>
+                    </nav>
+                {% else %}
+                    <nav class="navbar">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'login' %}">Iniciar Sesion</a></li>
+                            <li><a href="{% url 'signup' %}">Registrarse</a></li>
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+            <div class="header-content container">
+                <div class="header-text">
+                    <h1>Compra venta de Casas</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        Delectus saepe atque suscipit, nostrum illum, placeat temporibus 
+                        incidunt ipsum ad repudiandae dolorum nihil eligendi, 
+                        tenetur reiciendis aliquid ipsam aspernatur beatae doloribus!
+                    </p>
+                    <a href="#VerMas" class="btn-1">Informacion</a>
+                </div>
+            </div>
+        </header>
+        <section class="direccion container" id="VerMas">
+            <p>APTOS</p>
+            <p>ventadecasas099@gmail.com</p>
+            <p>232323114234</p>
+        </section>
+        <section class="about container">
+            <div class="about-img">
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for venta in ventas %}
+                      <div class="carousel-item active">
+                        <img src="{{venta.imagen}}" class="d-block w-100" alt="...">
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+            </div>
+            <div class="about-txt">
+                <h2>Nosotros</h2>
+                <p>
+                    Que esperas por mirar nuestra gran variedad de Apartamentos y Casas
+                    que tenemos para ti de muy bajos precios, no te pierdas la oportunidad
+                    de tener la casa de tus sueños, solo da click en el boton y podras mirar la Casa
+                    que tanto deseas para ti y tu familia!!!
+                </p>
+                <a href="informacion" class="btn-1">Ver Propiedades</a>
+            </div>
+        </section>
+
+        <main class="informacion container">
+            <div class="informacion-1">
+                <h3>15</h3>
+                <p>Mansiones</p>
+            </div>
+            <div class="informacion-1">
+                <h3>150</h3>
+                <p>Apartamentos</p>
+            </div>
+            <div class="informacion-1">
+                <h3>20</h3>
+                <p>Casas</p>
+            </div>
+            <div class="informacion-1">
+                <h3>12</h3>
+                <p>Casas rurales</p>
+            </div>
+        </main>
+        
+        <!--
+                <div class="contenedor">
+                    <div class="contenedos-section">
+                        <div class="card">
+                            <figure>
+                                <img src="{{venta.imagen}}" alt="{{venta.nombre}}">
+                            </figure>
+                            <div class="contenido">
+                                <h3>{{venta.nombre}}</h3>
+                                <h4>{{venta.precio}}</h4>
+                                <a href="detalle_venta/{{venta.id}}" class="btn btn-primary">Ver Mas</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+        <footer class="footer container">
+            <div class="footer-content">
+                <div class="footer-form">
+                    <h2>Contactanos</h2>
+                    <form>
+                        <input class="campo" type="text" placeholder="nombre">
+                        <input type="email" placeholder="email" class="campo">
+                        <textarea class="campo"cols="30" rows="10"></textarea>
+                        <input type="submit" value="enviar" class="btn-2">
+                    </form>
+                </div>
+                <div class="footer-txt">
+                    <h3>55660044</h3>
+                    <p>ventadecasas099@gmail.com</p>
+                    <p>Casas Mosquera</p>
+                </div>
+            </div>
+            <div class="footer-2">
+                <p>Espero tengas la mejor esperiencia en nuestra tienda</p>
+            </div>
+        </footer>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+                <div class="modal-footer">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    </body>
+</html>
+
+
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&display=swap');
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        list-style: none;
+    }
+    body{
+        font-family: 'Bebas Neue', cursive;
+        background-color: #000000;
+    }
+    #carouselExample{
+        width: 500px;
+    }
+
+    p{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    /*
+    .contenedor{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 1100px;
+    }
+    .card{
+        display: flex;
+        text-align: center;
+        width: 30%;
+        margin: 20px;
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: #FEFCFB;
+        box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+        cursor: default;
+        transition: all 400ms ease;
+    }
+    .card img{
+       width: 100%;
+       height: 210px; 
+    }
+    
+    .card:hover{
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+        transform: translateY(-3%);
+    }
+
+    .card .contenido{
+        padding: 15px;
+        text-align: center;
+    }
+    .contenedos-section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }*/
+    .header{
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)),
+            url(https://bi.mrv.com.br/upload/GaleriaBlogs/1/2014/12/DSC_5222.jpg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    .menu{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo{
+        color: #FFFDFC;
+        font-size: 25px;
+    }
+    .menu .navbar ul li{
+        position: relative;
+        float: left;
+    }
+    .menu .navbar ul li a{
+        font-size: 18px;
+        padding: 20px;
+        color: #FFFDFC;
+        display: block;
+        text-decoration: none;
+    }
+    .menu .navbar ul li a:hover{
+        color: #B79758;
+    }
+
+    #menu{
+        display: none;
+    }
+    .carousel-item img{
+        width: 350px;
+        height: 350px;
+    }
+    .header-text{
+        width: 50%;
+    }
+    .header-text h1{
+        margin-top: 90px;
+        font-size: 105px;
+        line-height: 110px;
+        color: #FEFCFB;
+        margin-bottom: 15px;
+    }
+    .header-text p{
+        font-size: 16px;
+        color: #E0E0E0E0;
+        margin-bottom: 35px;
+        text-decoration: none;
+    }
+    .btn-1{
+        display: inline-block;
+        padding: 11px 45px;
+        text-decoration: none;
+        background-color: #B79758;
+        color: #FEFCFB;
+        border-radius: 25px;
+        font-size: 22px;
+
+    }
+    .btn-1:hover{
+        display: inline-block;
+        padding: 11px 45px;
+        text-decoration: none;
+        background-color: #8d7340;
+        color: #FEFCFB;
+        border-radius: 25px;
+        font-size: 22px;
+
+    }
+
+    /*
+    Segunda section
+    */
+
+    .direccion{
+        display: flex;
+        justify-content: space-between;
+        padding: 40px 0;
+    }
+    .direccion p{
+        color: #FEFCFB;
+        font-size: 16px;
+    }
+
+    .about{
+        padding: 100px 0;
+        display: flex;
+    }
+    .about-txt, .about-img{
+        width: 50%;
+    }
+
+    .about-img img{
+        width: 450px;
+    }
+
+    h2{
+        font-size: 70px;
+        color: #FEFCFB;
+        margin-bottom: 15px;
+    }
+
+    .about-txt p{
+        font-size: 16px;
+        color: #FFFDFC;
+        margin-bottom: 35px;
+    }
+
+    /*Tercera Section*/
+    .informacion{
+        display: flex;
+        justify-content: space-between;
+        padding: 50px 0;
+    }
+
+    .informacion-1{
+        display: flex;
+        align-items: center;
+    }
+    .informacion-1 h3{
+        font-size: 70px;
+        color: #FEFCFB;
+    }
+    .informacion-1 p{
+        font-size: 16px;
+        color: #FFFDFC;
+        margin-left: 15px;
+    }
+
+    /*Footer*/
+    .footer{
+        padding: 100px 0 0 0;
+    }
+
+    .footer-content{
+        display: flex;
+    }
+    .footer-form{
+        width: 50%;
+    }
+
+    .footer-txt{
+        width: 50%;
+    }
+    form{
+        display: flex;
+        width: 350px;
+        flex-direction: column;
+        margin-left: 200px;
+    }
+
+    .campo{
+        background-color: #201F23;
+        padding: 17px 35px;
+        outline: none;
+        color: #7E7E7E;
+        border: 0;
+        margin-bottom: 10px;
+    }
+    .campo::placeholder{
+        color: #7E7E7E;
+    }
+    .btn-2{
+        padding: 17px 35px;
+        border: 2px solid #8d7340;
+        background-color: #B79758;
+        color: #FEFCFB;
+        border-radius: 25px;
+        text-transform: uppercase;
+    }
+    .footer-txt h3{
+        color: #FEFCFB;
+        font-size: 35px;
+        margin: 0 100px 20px 0;
+    }
+    .footer-txt {
+        margin-bottom: 25px;
+        font-size: 15px;
+        color: #E0E0E0E0;
+    }
+    .footer-2 p{
+        padding: 50px 0;
+        text-align: center;
+        font-size: 16px;
+        color: #E0E0E0E0;
+    }
+
+
+    @media(max-width: 991px){
+        #carouselExample{
+        width: 370px;
+    }
+    
+        .carousel-item img{
+            width: 700px;
+            height: 350px;
+        }
+        .menu{
+            padding: 30px;
+
+        }
+
+        .menu-label{
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #201F23;
+            display: none;
+        }
+
+        .menu .navbar ul li{
+            width: 100%;
+            
+            
+        }
+
+        .menu .navbar ul li a{
+        font-size: 18px;
+        padding: 20px;
+        color: #FFFDFC;
+        display: block;
+        text-decoration: none;
+        }
+
+        #menu:checked ~ .navbar{
+            display: initial;
+        }
+
+        .header{
+            min-height: 0vh;
+        }
+
+        .header-content {
+            padding: 100px 30px;
+        }
+
+        .header-text {
+            width: 100%;
+            text-align: center;
+        }
+
+        .header-text h1{
+            font-size: 70px;
+            line-height: 80px;
+        }
+
+        .direccion{
+            flex-direction: column;
+            text-align: center;
+            padding: 30px;
+
+        }
+
+        .direccion p{
+            margin-bottom: 10px;
+
+        }
+
+        .about{
+            padding: 0 30px 30px 30px;
+            flex-direction: column;
+        }
+
+        .about-txt{
+            width: 100%;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .about-img {
+            width: 100%;
+            order: 2;
+            text-align: center;
+        }
+        .about-img img{
+            width: 300px;
+        }
+
+        .informacion{
+            padding: 30px;
+            flex-direction: column;
+            margin-left: 80px;
+        }
+
+        .house{
+            flex-direction: column;
+        }
+
+        .footer{
+            padding: 30px 30px 0 30px;
+        }
+        .footer-content{
+            flex-direction: column;
+        }
+
+        .footer-form{
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer-txt{
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer-txt h3{
+            margin: 0 0 20px 0;
+        }
+
+        form{
+            width: 100%;
+            margin: 0 0 25px 0;
+        }
+
+        .footer-2 p{
+            text-align: center;
+        }
+    }
+</style>
